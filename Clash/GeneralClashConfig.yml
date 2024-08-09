@@ -28,7 +28,7 @@ geodata-mode: true # GeoIP 使用的文件,可选 true 为.dat/ false 为.mmdb
 geosite-matcher: succinct # GeoSite 使用的匹配器实现，可选：succinct：与规则集相同；mph：来自 V2Ray，也是 Xray 中的“混合”
 geodata-loader: memconservative # GEO 文件加载模式：standard：标准加载器；memconservative：专为内存受限(小内存)设备优化的加载器(默认值)
 geo-auto-update: true # 自动更新 GEO 文件,可选 true/false
-geo-update-interval: 72 # 更新间隔,单位：小时
+geo-update-interval: 144 # 更新间隔,单位：小时
 geox-url: # 自定义 GEO 文件下载地址
   geoip: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
   geosite: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
