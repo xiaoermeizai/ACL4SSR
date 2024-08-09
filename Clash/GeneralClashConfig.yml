@@ -57,15 +57,19 @@ sniffer: # 域名嗅器,通过读取握手包内的域名字段,将IP还原成�
     - "Mijia Cloud"
 
 dns:
-  enabled: true
+  enable: true
+  prefer-h3: true #优先使用 DOH 的 http/3
   listen: 0.0.0.0:1053
   ipv6: true
-  default-nameserver:
+  ipv6-timeout: 300 #ipv6超时，单位 毫秒
+  cache-algorithm: arc #缓存算法
+  use-hosts: true #查询系统Hosts
+  default-nameserver: #默认 DNS, 用于解析 DNS 服务器 的域名，必须为 IP, 可为加密 DNS
     - 223.5.5.5
     - 114.114.114.114
-  enhanced-mode: fake-ip #enhanced-mode可选 redir-host 和 fake-ip，fake-ip响应更快但可能带来一些问题
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.0/16
+  fake-ip-filter: #fakeip 过滤，以下地址不会下发 fakeip 映射用于连接
     - '*.lan'
     - '*.linksys.com'
     - '*.linksyssmartwifi.com'
@@ -122,9 +126,18 @@ dns:
     - stun.*.*
     - stun.*.*.*
     - '*.mcdn.bilivideo.cn'
-  nameserver:
+  nameserver-policy: ##指定域名查询的解析服务器，优先于 nameserver/fallback 查询
+    "geosite:cn,private":
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
+  nameserver: #默认的域名解析服务器，如不配置 fallback/proxy-server-nameserver , 则所有域名都由 nameserver 解析
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - https://[2606:4700:4700::1111]/dns-query
+    - https://[2001:4860:4860::8888]/dns-query
+  proxy-server-nameserver: #代理节点域名解析服务器，仅用于解析代理节点的域名
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
   fallback-filter:
     geoip: false
     ipcidr:
