@@ -71,7 +71,7 @@ dns:
     - 114.114.114.114
     - '[2402:4e00::]'
     - '[2400:3200::1]'
-  enhanced-mode: fake-ip
+  enhanced-mode: fake-ip # enhanced-mode可选 redir-host 和 fake-ip，fake-ip响应更快但可能带来一些问题
   fake-ip-range: 198.18.0.0/16
   fake-ip-filter: #fakeip 过滤，以下地址不会下发 fakeip 映射用于连接
     - '*.lan'
