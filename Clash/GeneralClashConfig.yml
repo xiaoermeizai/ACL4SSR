@@ -5,10 +5,10 @@
 # 节点类型：ss, vmess, ssr, trojan, http, socks5, hysteria, vless
 ####################################
 
-# http-port: 7890 # HTTP(S) 代理端口
-# socks-port: 7892 # SOCKS5 代理端口
-mixed-port: 1080 # HTTP(S) 和 SOCKS 代理混合端口
-redir-port: 7891 # redirect 透明代理端口，仅能代理 TCP 流量，仅适用于 Linux 以及 macOS 使用
+mixed-port: 7890 # HTTP(S) 和 SOCKS 代理混合端口
+# http-port: 7899 # HTTP(S) 代理端口
+# socks-port: 7898 # SOCKS5 代理端口
+# redir-port: 7891 # redirect 透明代理端口，仅能代理 TCP 流量，仅适用于 Linux 以及 macOS 使用
 # tproxy-port: 1536 # tproxy 透明代理端口，可以代理 TCP 以及 UDP 流量，仅限 linux 适用 (Android 设备属于 Linux 设备）
 
 mode: rule # 运行模式：rule 规则匹配；global 全局代理(需要在GLOBAL策略组选择代理/策略)；direct 全局直连
@@ -20,7 +20,7 @@ allow-lan: true # 允许局域网内其他设备经过 Clash 的代理端口访�
 bind-address: "*" # 绑定 IP, 通过 LAN 访问一个/一些特定的 IP 地址，"*" 绑定所有 IP 地址，默认值，不填写此项则绑定全部
 ipv6: true # 是否允许内核接受 IPv6 流量，可选值 true/false
 tcp-concurrent: true # tcp并发，允许同时处理多个tcp连接，可选值 true/false
-keep-alive-interval: 30 # TCP Keep Alive 间隔,单位分钟 | 控制 Clash 发出 TCP Keep Alive 包的间隔,减少移动设备耗电问题的临时措施
+keep-alive-interval: 30 # TCP Keep Alive 间隔,单位秒 | 控制 Clash 发出 TCP Keep Alive 包的间隔,减少移动设备耗电问题的临时措施
 unified-delay: true # 统一延迟，更换延迟计算方式,去除握手等额外延迟 可选值 true/false
 
 # GEO文件配置
@@ -33,6 +33,7 @@ geox-url: # 自定义 GEO 文件下载地址
   geoip: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
   geosite: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
   mmdb: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb"
+  asn: "https://hub.gitmirror.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 
 profile: # 缓存
   store-selected: true # 储存 API 对策略组的选择，以供下次启动时使用
