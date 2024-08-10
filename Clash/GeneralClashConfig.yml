@@ -69,9 +69,7 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
     - 114.114.114.114
-    - '[2402:4e00::]'
-    - '[2400:3200::1]'
-  enhanced-mode: redir-host # enhanced-mode可选 redir-host 和 fake-ip，fake-ip响应更快但可能带来一些问题
+  enhanced-mode: fake-ip # enhanced-mode可选 redir-host 和 fake-ip，fake-ip响应更快但可能带来一些问题
   fake-ip-range: 198.18.0.0/16
   fake-ip-filter: #fakeip 过滤，以下地址不会下发 fakeip 映射用于连接
     - '*.lan'
@@ -135,13 +133,12 @@ dns:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
   nameserver: #默认的域名解析服务器，如不配置 fallback/proxy-server-nameserver , 则所有域名都由 nameserver 解析
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-    - https://[2606:4700:4700::1111]/dns-query
-    - https://[2001:4860:4860::8888]/dns-query
+    - https://8.8.4.4/dns-query  
+    - https://1.0.0.1/dns-query
   proxy-server-nameserver: #代理节点域名解析服务器，仅用于解析代理节点的域名
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
+    - https://doh.pub/dns-query
+    - https://8.8.4.4/dns-query
+    - https://1.0.0.1/dns-query
   fallback-filter:
     geoip: false
     ipcidr:
