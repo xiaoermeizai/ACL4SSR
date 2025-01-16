@@ -1,0 +1,49 @@
+name: Weekly ACL4SSR Update
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # 每周日 00:00 UTC 执行
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download ACL4SSR archive
+        run: |
+          curl -L -o acl4ssr.zip https://github.com/ACL4SSR/ACL4SSR/archive/refs/heads/master.zip
+
+      - name: Unzip downloaded archive
+        run: |
+          unzip acl4ssr.zip -d acl4ssr
+
+      - name: Remove unwanted file
+        run: |
+          rm -f acl4ssr/ACL4SSR-master/Clash/config/ACL4SSR_Online_Full_MultiMode.ini
+
+      - name: Sync files to repository root
+        run: |
+          rsync -av --remove-source-files acl4ssr/ACL4SSR-master/ ./
+
+      - name: Clean up temporary files
+        run: |
+          rm -rf acl4ssr acl4ssr.zip
+
+      - name: Configure Git user
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Weekly update: Sync files from ACL4SSR"
+            git push origin main
+          fi
